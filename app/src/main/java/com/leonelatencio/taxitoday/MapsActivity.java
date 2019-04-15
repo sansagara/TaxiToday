@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -56,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        ShowDistance = (TextView) findViewById();
+        ShowDistance = (TextView) findViewById(R.id.show_distance);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -143,39 +145,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        Button btnDriving = (Button) findViewById(R.id.btnDriving);
+        Button btnDriving = findViewById(R.id.btnDriving);
         btnDriving.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                build_retrofit_and_get_response("driving");
+                build_retrofit_and_get_response();
             }
         });
 
-        Button btnWalk = (Button) findViewById(R.id.btnWalk);
-        btnWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                build_retrofit_and_get_response("walking");
-            }
-        });
     }
 
-    private void build_retrofit_and_get_response(String type) {
-
+    private void build_retrofit_and_get_response() {
         String url = "https://maps.googleapis.com/maps/";
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         RetrofitMaps service = retrofit.create(RetrofitMaps.class);
-        Call<Example> call = service.getDistanceDuration("metric", origin.latitude + "," + origin.longitude,dest.latitude + "," + dest.longitude, type);
+        Call<DirectionsResponse> call = service.getDistanceDuration("metric", origin.latitude + "," + origin.longitude,dest.latitude + "," + dest.longitude, "driving");
 
-        call.enqueue(new Callback<Example>() {
+        call.enqueue(new Callback<DirectionsResponse>() {
+
+
             @Override
-            public void onResponse(Response<Example> response, Retrofit retrofit) {
-
+            public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
                 try {
                     //Remove previous line from map
                     if (line != null) {
@@ -203,9 +197,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<DirectionsResponse> call, Throwable t) {
                 Log.d("onFailure", t.toString());
             }
+
         });
 
     }

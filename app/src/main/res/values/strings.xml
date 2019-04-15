@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TaxiToday</string>
     <string name="title_activity_maps">Map</string>
+    <string name="driving_mode">Driving Mode</string>
 </resources>
