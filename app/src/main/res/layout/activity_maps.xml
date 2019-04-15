@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout n1:layout_width="fill_parent" n1:layout_height="fill_parent"
+    xmlns:n1="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.CardView n1:layout_gravity="top" n1:id="@+id/card_view" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n2:cardCornerRadius="2.0dip" xmlns:n2="http://schemas.android.com/apk/res-auto">
+        <LinearLayout n1:orientation="vertical" n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+            <fragment n1:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" n1:id="@id/place_fragment_from" n1:layout_width="fill_parent" n1:layout_height="wrap_content" />
+            <fragment n1:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" n1:id="@id/place_fragment_to" n1:layout_width="fill_parent" n1:layout_height="wrap_content" />
+            <Button n1:id="@id/btnDriving" n1:layout_width="fill_parent" n1:layout_height="wrap_content" n1:text="@string/driving_mode" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <FrameLayout n1:orientation="vertical"
+        n1:layout_width="fill_parent"
+        n1:layout_height="wrap_content"
+        n1:layout_below="@+id/card_view">
+        <fragment n1:name="com.google.android.gms.maps.SupportMapFragment" n1:id="@id/card_view" n1:layout_width="fill_parent" n1:layout_height="fill_parent" />
+        <LinearLayout n1:orientation="vertical" n1:layout_width="fill_parent" n1:layout_height="wrap_content">
+            <TextView n1:textSize="26.0sp"
+                n1:textColor="#ffff0000"
+                n1:textColorHighlight="@android:color/primary_text_dark"
+                n1:id="@+id/show_distance"
+                n1:layout_width="wrap_content"
+                n1:layout_height="wrap_content" />
+            <TextView n1:textSize="26.0sp"
+                n1:textColor="#ffff0000"
+                n1:textColorHighlight="@android:color/primary_text_dark"
+                n1:id="@+id/show_time"
+                n1:layout_width="wrap_content"
+                n1:layout_height="wrap_content" />
+            <TextView n1:textSize="26.0sp"
+                n1:textColor="#ffff0000"
+                n1:textColorHighlight="@android:color/primary_text_dark"
+                n1:id="@+id/show_fare"
+                n1:layout_width="wrap_content"
+                n1:layout_height="wrap_content" />
+        </LinearLayout>
+    </FrameLayout>
+    <com.google.android.gms.ads.AdView n1:id="@id/adView" n1:layout_width="wrap_content" n1:layout_height="wrap_content" n1:layout_alignParentBottom="true" n1:layout_centerHorizontal="true" n3:adSize="BANNER" n3:adUnitId="ca-app-pub-7800821572802910/9134727990" xmlns:n3="http://schemas.android.com/apk/res-auto" />
+</RelativeLayout>
